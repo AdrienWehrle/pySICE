@@ -208,8 +208,8 @@ def prepare_processing(OLCI_scene, angles, compute_polluted=True):
     # Filtering pixels unsuitable for retrieval
     snow = xr.Dataset()
     snow["isnow"] = OLCI_scene["sza"] * np.nan
-    snow["isnow"] = xr.where(OLCI_scene.toa.sel(band=20) < 0.1, 102, snow.isnow)
-    snow["isnow"] = xr.where(OLCI_scene.toa.sel(band=0) < 0.2, 103, snow.isnow)
+    # snow["isnow"] = xr.where(OLCI_scene.toa.sel(band=20) < 0.1, 102, snow.isnow)
+    # snow["isnow"] = xr.where(OLCI_scene.toa.sel(band=0) < 0.2, 103, snow.isnow)
     snow["isnow"] = xr.where(OLCI_scene.sza > 75, 100, snow.isnow)
     snow["isnow"] = xr.where(OLCI_scene["sza"].isnull(), 999, snow.isnow)
 
