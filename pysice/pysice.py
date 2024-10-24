@@ -281,7 +281,8 @@ def snow_properties(OLCI_scene, angles, snow):
 
     # filtering small D
     diameter_thresh = 0.1
-    valid = D >= diameter_thresh
+    # valid = D >= diameter_thresh
+    valid = np.isfinite(D)
     snow["isnow"] = xr.where((D < 0.1) & (snow.isnow < 100), 104, snow.isnow)
     OLCI_scene["toa"] = OLCI_scene.toa.where(valid)
     snow["diameter"] = D.where(valid)
